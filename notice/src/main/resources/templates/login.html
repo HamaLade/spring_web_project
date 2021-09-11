@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" class="h-100">
+
+<head th:replace="/fragments/header.html::fragment-header('로그인')"></head>
+
+<body class="d-flex flex-column h-100">
+<header th:replace="/fragments/nav.html::fragment-nav"></header>
+
+<main class="form-signin">
+    <div class="container border rounded flex-md-row mb-4 shadow-sm h-md-250">
+        <form th:action="@{/auth/login}" method="post">
+
+            <div th:if="${param.error}"  class="alert alert-danger" role="alert">
+                아이디 혹은 비밀번호가 일치하지 않습니다
+            </div>
+
+            <div th:if="${param.logout}"  class="alert alert-primary" role="alert">
+                로그아웃 되었습니다
+            </div>
+
+            <h1 class="h3 m-3">로그인</h1>
+
+            <div>
+                <div class="m-3">
+                    <label for="username">아이디</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="아이디를 입력하세요." required autofocus>
+                </div>
+            </div>
+
+            <div>
+                <div class="m-3">
+                    <label for="password">패스워드</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="패스워드를 입력하세요." required>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-lg btn-primary mb-3" type="submit">로그인</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+</main>
+<footer th:replace="/fragments/footer.html::fragment-footer"></footer>
+<script th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>

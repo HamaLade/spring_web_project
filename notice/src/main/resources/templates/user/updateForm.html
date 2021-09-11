@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/header.html::fragment-header('회원 가입')"></head>
+
+<body class="d-flex flex-column h-100">
+<header th:replace="/fragments/nav.html::fragment-nav"></header>
+
+<main class="form-signin">
+    <div class="container border rounded flex-md-row mb-4 shadow-sm h-md-250">
+        <form action="" th:action th:object="${userAddInfo}" method="post">
+            <div th:if="${#fields.hasGlobalErrors()}">
+                <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 에러 출력</p>
+            </div>
+
+            <h1 class="h3 m-3">회원가입</h1>
+
+            <div>
+                <div class="m-3">
+                    <label for="username">아이디</label>
+                    <div style="color: red" th:errors="*{username}"/>
+                    <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="아이디를 입력하세요.">
+                </div>
+            </div>
+
+            <div>
+                <div class="m-3">
+                    <label for="password">패스워드</label>
+                    <div style="color: red" th:errors="*{password}"/>
+                    <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="패스워드를 입력하세요.">
+                </div>
+            </div>
+
+            <div>
+                <div class="m-3">
+                    <label for="nickname">닉네임</label>
+                    <div style="color: red" th:errors="*{nickname}"/>
+                    <input th:field="*{nickname}" type="text" class="form-control" id="nickname" placeholder="닉네임을 입력하세요.">
+                </div>
+            </div>
+
+            <div>
+                <div class="m-3">
+                    <label for="email">이메일</label>
+                    <div style="color: red" th:errors="*{email}"/>
+                    <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="이메일을 입력하세요.">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-lg btn-primary mb-3" type="submit">회원가입</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+</main>
+<footer th:replace="/fragments/footer.html::fragment-footer"></footer>
+<script th:src="@{/jquery/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>
