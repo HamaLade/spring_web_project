@@ -16,6 +16,11 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
       hibernate.format_sql: true
 
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true # html에서 put delete 등을 사용하기 위해서 설정
+
   thymeleaf:
     cache: false
 

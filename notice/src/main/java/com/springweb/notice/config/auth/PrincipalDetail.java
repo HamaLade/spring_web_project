@@ -29,16 +29,32 @@ public class PrincipalDetail implements UserDetails {
         return collection;
     }
 
-    // 계정의 비밀번호를 리턴
-    @Override
-    public String getPassword() {
-        return user.getPassword();
+    public Long getId() {
+        return user.getId();
     }
 
     // 계정의 이름을 리턴
     @Override
     public String getUsername() {
         return user.getUsername();
+    }
+
+    // 계정의 비밀번호를 리턴
+    @Override
+    public String getPassword() {
+        return user.getPassword();
+    }
+
+    public String getNickname() {
+        return user.getNickname();
+    }
+
+    public String getEmail() {
+        return user.getEmail();
+    }
+
+    public void setUser(User updateUser) {
+        user.update(updateUser);
     }
 
     // 계정이 만료되지 않았는지 리턴 (true : 만료안됨)

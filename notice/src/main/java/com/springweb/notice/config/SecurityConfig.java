@@ -3,6 +3,7 @@ package com.springweb.notice.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -42,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable() // csrf 토큰 비활성화
 
                 .authorizeRequests() // url별 권한 관리를 설정
-                .antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**, /jquery/**", "/home").permitAll() // 해당 url 모두 접근 인증없이 허용
+                .antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**, /jquery/**").permitAll() // 해당 url 모두 접근 인증없이 허용
                 .anyRequest().authenticated() // 요청에 대하여 인증요청
 
                 .and()
@@ -51,5 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/auth/login") // 로그인 페이지
                 .loginProcessingUrl("/auth/login") // 로그인 url
                 .defaultSuccessUrl("/home", true); // 요상하게 '/'인 상태로 인덱스html을 호출하면 계속해서 jquery를 호출하여 강제로 입력하였음.
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

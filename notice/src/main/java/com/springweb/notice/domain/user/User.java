@@ -1,6 +1,7 @@
 package com.springweb.notice.domain.user;
 
 import lombok.*;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 
@@ -32,4 +33,17 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    public String getRoleKey() {
+        return this.role.getKey();
+    }
+
+    public void update(User user) {
+        if (StringUtils.hasText(user.password))
+            this.password = user.getPassword();
+        if (StringUtils.hasText(user.nickname))
+            this.nickname = user.getNickname();
+        if (StringUtils.hasText(user.email))
+            this.email = user.getEmail();
+    }
 }

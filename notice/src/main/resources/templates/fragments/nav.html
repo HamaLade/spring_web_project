@@ -21,8 +21,8 @@
     <div class="col-md-3 text-end">
         <button type="button" sec:authorize="isAnonymous()" class="btn btn-outline-primary me-2" onclick="location.href='/auth/login'">로그인</button>
         <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" onclick="location.href='/auth/user/join'">회원가입</button>
-        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-primary" onclick="location.href='/auth/login'">회원정보</button>
-        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-dark" onclick="location.href='/auth/login'">로그아웃</button>
+        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-primary" onclick="location.href='/user/update'">회원정보</button>
+        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-dark" onclick="location.href='/user/logout'">로그아웃</button>
     </div>
 </header>
 </body>
