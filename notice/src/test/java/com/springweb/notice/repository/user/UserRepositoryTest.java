@@ -23,7 +23,6 @@ class UserRepositoryTest {
                 User.builder()
                         .username("user1")
                         .password("password")
-                        .nickname("nickname1")
                         .email("g@g")
                         .role(Role.USER)
                         .build()

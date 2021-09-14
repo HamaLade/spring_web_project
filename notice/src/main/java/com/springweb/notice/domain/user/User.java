@@ -1,5 +1,6 @@
 package com.springweb.notice.domain.user;
 
+import com.springweb.notice.domain.BaseTimeEntity;
 import lombok.*;
 import org.springframework.util.StringUtils;
 
@@ -11,9 +12,10 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @SequenceGenerator(name = "user_seq_generator", sequenceName = "user_seq")
 @Entity
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_generator")
     private Long id;
 
@@ -23,9 +25,6 @@ public class User {
     @Setter
     @Column(nullable = false, length = 100)
     private String password;
-
-    @Column(nullable = false, length = 30)
-    private String nickname;
 
     @Column(nullable = false, length = 60)
     private String email;
@@ -41,8 +40,6 @@ public class User {
     public void update(User user) {
         if (StringUtils.hasText(user.password))
             this.password = user.getPassword();
-        if (StringUtils.hasText(user.nickname))
-            this.nickname = user.getNickname();
         if (StringUtils.hasText(user.email))
             this.email = user.getEmail();
     }

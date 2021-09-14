@@ -32,7 +32,6 @@ public class UserUpdateDto {
         return User.builder()
                 .username(this.username)
                 .password(this.password)
-                .nickname(this.nickname)
                 .email(this.email)
                 .build();
     }
@@ -41,7 +40,6 @@ public class UserUpdateDto {
         return UserUpdateDto.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .nickname(user.getNickname())
                 .email(user.getEmail())
                 .build();
     }

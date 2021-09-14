@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/header.html::fragment-header('글 작성')"></head>
+
+<body class="d-flex flex-column h-100">
+<header th:replace="/fragments/nav.html::fragment-nav"></header>
+
+<main class="form-signin">
+
+  <div class="container border rounded mb-4 shadow-sm h-md-250">
+
+    <form th:object="${viewInfo}">
+      <input type="hidden" name="_method" value="delete"/>
+
+      <h3 class="h3 m-3" th:text="*{title}"></h3>
+
+      <div class="row">
+        <p class="col-4" th:text="|작성자 : *{username}   조회수 : *{count}|"></p>
+        <p class="col-4" th:text="*{#temporals.format(createTime, 'yyyy-MM-dd HH:mm')}"></p>
+      </div>
+
+
+      <div>
+        <p class="m-3" th:text="*{content}"></p>
+      </div>
+
+      <div class="text-center">
+        <th:block th:if="${viewInfo.username == #authentication.principal.username}">
+          <a class="btn btn-lg btn-primary mb-3" th:href="@{/board/update/{id}(id=${viewInfo.id})}">수정</a>
+          <button class="btn btn-lg btn-primary mb-3" type="submit">삭제</button>
+        </th:block>
+        <a class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">뒤로</a>
+      </div>
+
+    </form>
+
+  </div>
+
+</main>
+
+</main>
+<footer th:replace="/fragments/footer.html::fragment-footer"></footer>
+<script th:src="@{/jquery/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>

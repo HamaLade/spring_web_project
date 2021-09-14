@@ -28,10 +28,6 @@ public class UserAddDto {
     @Size(min = 8, max = 60, message = "패스워드는 8 ~ 60자 이여야 합니다", groups = SizeGroup.class)
     private String password;
 
-    @NotEmpty(message = "닉네임은 필수 입력값 입니다", groups = NotEmptyGroup.class)
-    @Size(min = 6, max = 30, message = "닉네임은 6 ~ 30자 이여야 합니다", groups = SizeGroup.class)
-    private String nickname;
-
     @NotEmpty(message = "이메일은 필수 입력값 입니다", groups = NotEmptyGroup.class)
     @Email(message = "잘못된 이메일 형식입니다", groups = EmailGroup.class)
     private String email;
@@ -42,7 +38,6 @@ public class UserAddDto {
         return User.builder()
                 .username(this.username)
                 .password(this.password)
-                .nickname(this.nickname)
                 .email(this.email)
                 .role(Role.USER)
                 .build();
@@ -52,7 +47,6 @@ public class UserAddDto {
         return UserAddDto.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .nickname(user.getNickname())
                 .email(user.getEmail())
                 .role(user.getRole())
                 .build();

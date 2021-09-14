@@ -33,14 +33,6 @@
 
             <div>
                 <div class="m-3">
-                    <label for="nickname">닉네임</label>
-                    <div style="color: red" th:errors="*{nickname}"/>
-                    <input th:field="*{nickname}" type="text" class="form-control" id="nickname" placeholder="닉네임을 입력하세요.">
-                </div>
-            </div>
-
-            <div>
-                <div class="m-3">
                     <label for="email">이메일</label>
                     <div style="color: red" th:errors="*{email}"/>
                     <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="이메일을 입력하세요.">
@@ -49,6 +41,7 @@
 
             <div class="text-center">
                 <button class="btn btn-lg btn-primary mb-3" type="submit">회원가입</button>
+                <button class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">취소</button>
             </div>
         </form>
     </div>

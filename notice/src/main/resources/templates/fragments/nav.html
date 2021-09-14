@@ -12,17 +12,15 @@
     </a>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/" class="nav-link px-2 link-secondary">홈</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">게시판</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">글쓰기</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+        <li><a th:href="@{/}" class="nav-link px-2 link-secondary">홈</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/board/write}" class="nav-link px-2 link-dark">글쓰기</a></li>
     </ul>
 
     <div class="col-md-3 text-end">
-        <button type="button" sec:authorize="isAnonymous()" class="btn btn-outline-primary me-2" onclick="location.href='/auth/login'">로그인</button>
-        <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" onclick="location.href='/auth/user/join'">회원가입</button>
-        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-primary" onclick="location.href='/user/update'">회원정보</button>
-        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-dark" onclick="location.href='/user/logout'">로그아웃</button>
+        <button type="button" sec:authorize="isAnonymous()" class="btn btn-outline-primary me-2" th:onclick="|location.href='@{/auth/login}'|">로그인</button>
+        <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" th:onclick="|location.href='@{/auth/user/join}'|">회원가입</button>
+        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-primary" th:onclick="|location.href='@{/user/update}'|">회원정보</button>
+        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-dark" th:onclick="|location.href='@{/logout}'|">로그아웃</button>
     </div>
 </header>
 </body>
