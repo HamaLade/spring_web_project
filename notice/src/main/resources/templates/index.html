@@ -8,17 +8,32 @@
 
 <main class="flex-shrink-0">
     <div class="container">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" th:each="board :${boardList.infoList}">
             <div class="col p-4 d-flex flex-column position-static">
-                <a href="#" class=".a-title">
-                    <h3 class="mb-0 title" style="padding-bottom: 10px;">제목</h3>
+                <a th:href="@{/board/view/{id}(id=${board.id})}" class=".a-title">
+                    <h3 class="mb-0 title" style="padding-bottom: 10px;" th:text="${board.title}">제목</h3>
                 </a>
-                <p class="card-text mb-auto">글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 글내용 </p>
-                <div class="mb-1 text-muted" style="padding-top: 15px;">날짜</div>
+                <p class="card-text mb-auto" th:text="${board.content}">글내용</p>
+                <div class="mb-1 text-muted" style="padding-top: 15px;" th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">날짜</div>
             </div>
         </div>
     </div>
 </main>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled' : '' ">
+            <a class="page-link" th:href="@{/(page=${boards.pageable.pageNumber - 1})}">Previous</a>
+        </li>
+        <li class="page-item" th:classappend="${i == boards.pageable.pageNumber + 1} ? 'active' : '' " th:each="i : ${#numbers.sequence(startPage, endPage)}">
+            <a class="page-link" th:href="@{/(page=${i - 1})}" th:text="${i}">1</a>
+        </li>
+        <li class="page-item" th:classappend="${boards.totalPages == boards.pageable.pageNumber + 1} ? 'disabled' : '' ">
+            <a class="page-link" th:href="@{/(page=${boards.pageable.pageNumber + 1})}">Next</a>
+        </li>
+    </ul>
+</nav>
+
 <footer th:replace="/fragments/footer.html::fragment-footer"></footer>
     <script th:src="@{/js/bootstrap.js}"></script>
     <script th:src="@{/jquery/jquery-3.6.0.min.js}"></script>

@@ -9,15 +9,17 @@
 <main class="form-signin">
 
   <div class="container border rounded mb-4 shadow-sm h-md-250">
-
-    <form th:object="${viewInfo}">
+    <form th:action="@{/board/delete/{id}(id=${viewInfo.id})}" th:object="${viewInfo}" method="post">
       <input type="hidden" name="_method" value="delete"/>
 
       <h3 class="h3 m-3" th:text="*{title}"></h3>
 
       <div class="row">
-        <p class="col-4" th:text="|작성자 : *{username}   조회수 : *{count}|"></p>
-        <p class="col-4" th:text="*{#temporals.format(createTime, 'yyyy-MM-dd HH:mm')}"></p>
+        <div class="col-md-4 text-end w-100">
+          <p class="mb-1" th:text="|작성자 : *{username}|"></p>
+          <p class="mb-1" th:text="|조회수 : *{count}|"></p>
+          <p class="mb-1" th:text="*{#temporals.format(createTime, 'yyyy-MM-dd HH:mm')}"></p>
+        </div>
       </div>
 
 

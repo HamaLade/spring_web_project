@@ -51,12 +51,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/auth/login") // 로그인 페이지
                 .loginProcessingUrl("/auth/login") // 로그인 url
-                .defaultSuccessUrl("/home", true) // '/'인 상태로 인덱스html을 호출하면 계속해서 jquery를 호출하여 강제로 입력하였음.
+                .defaultSuccessUrl("/", true) // '/'인 상태로 인덱스html을 호출하면 계속해서 jquery를 호출하여 true를 사용 항상 입력
 
                 .and()
+
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+
+                .and()
+
+                .rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7) // seconds to 7days
+                .userDetailsService(principalDetailService);
     }
 
     @Bean

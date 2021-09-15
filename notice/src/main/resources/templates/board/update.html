@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-업데이트 폼
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/header.html::fragment-header('글 작성')"></head>
+
+<body class="d-flex flex-column h-100">
+<header th:replace="/fragments/nav.html::fragment-nav"></header>
+
+<main class="form-signin">
+
+    <div class="container border rounded flex-md-row mb-4 shadow-sm h-md-250">
+
+        <form th:action="@{/board/update/{id}(id=${updateInfo.id})}" th:object="${updateInfo}" method="post">
+
+            <input type="hidden" name="_method" value="put"/>
+
+            <div th:if="${#fields.hasGlobalErrors()}">
+                <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 에러 출력</p>
+            </div>
+
+            <h1 class="h3 m-3">글 수정</h1>
+
+            <div>
+                <div class="m-3">
+                    <label for="title">제목</label>
+                    <script th:if="${#fields.hasErrors('title')}" type="text/javascript">alert("제목을 입력하셔야 합니다 (최대 150자)")</script>
+                    <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="제목을 입력하세요">
+                </div>
+            </div>
+
+            <div>
+                <div class="m-3">
+                    <label for="content">내용</label>
+                    <script th:if="${#fields.hasErrors('content')}" type="text/javascript">alert("글 내용을 입력해주세요")</script>
+                    <textarea th:field="*{content}" class="form-control" id="content" style="height: 10em" placeholder="글 내용을 입력하세요"></textarea>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-lg btn-primary mb-3" type="submit">수정</button>
+                <a class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">취소</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+</main>
+<footer th:replace="/fragments/footer.html::fragment-footer"></footer>
+<script th:src="@{/jquery/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
 </body>
 </html>

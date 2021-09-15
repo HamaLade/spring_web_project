@@ -2,6 +2,7 @@ package com.springweb.notice.repository.user;
 
 import com.springweb.notice.domain.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 
@@ -35,5 +36,12 @@ public class Board extends BaseTimeEntity {
 
     public void addCount() {
         this.count++;
+    }
+
+    public void updateBoard(String title, String content) {
+        if (StringUtils.hasText(title))
+            this.title = title;
+        if (StringUtils.hasText(content))
+            this.content = content;
     }
 }

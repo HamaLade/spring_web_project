@@ -33,10 +33,16 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="패스워드를 입력하세요." required>
                 </div>
             </div>
+            <div>
+                <div class="checkbox mb-3">
+                    <input type="checkbox" name="remember-me" id="rememberMe">
+                    <label for="rememberMe" aria-describedby="rememberMeHelp">로그인 유지</label>
+                </div>
+            </div>
 
             <div class="text-center">
                 <button class="btn btn-lg btn-primary mb-3" type="submit">로그인</button>
-                <button class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">취소</button>
+                <a class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">취소</a>
             </div>
         </form>
     </div>
