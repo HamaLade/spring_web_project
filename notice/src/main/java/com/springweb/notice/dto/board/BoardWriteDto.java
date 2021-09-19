@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
@@ -31,10 +32,14 @@ public class BoardWriteDto {
     public Board toEntity(User user) {
         return Board.builder()
                 .title(this.title)
-                .content(this.content)
+                .content(lineReplace(this.content))
                 .count(0)
                 .user(user)
                 .build();
+    }
+
+    public String lineReplace(String content) {
+        return content.replace("\r\n", "<br>");
     }
 
     public void setUser(User user) {

@@ -15,9 +15,8 @@ public class BoardRepositoryImpl implements BoardRepositoryCutsom{
 
     private final EntityManager em;
 
-
     @Override
-    public Optional<Board> findBoardByIdJoinUser(Long id) {
+    public Optional<Board> findBoardByIdFetchJoinUser(Long id) {
         List<Board> resultList = em.createQuery("select b from Board b join fetch b.user where b.id=:id", Board.class)
                 .setParameter("id", id)
                 .getResultList();
@@ -28,21 +27,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCutsom{
     }
 
     @Override
-    @Transactional
-    public Optional<Board> findBoardByIdJoinUserAndAddCount(Long id) {
-        List<Board> resultList = em.createQuery("select b from Board b join fetch b.user where b.id=:id", Board.class)
-                .setParameter("id", id)
-                .getResultList();
-        if (resultList.isEmpty())
-            return Optional.empty();
-        Board board = resultList.get(0);
-        board.addCount();
-        return Optional.of(board);
-    }
-
-
-    @Override
-    @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Transactional
     public boolean updateBoard(Long id, String title, String content, String username) {
         List<Board> resultList = em.createQuery("select b from Board b join fetch b.user where b.id=:id", Board.class)

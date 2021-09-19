@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests() // url별 권한 관리를 설정
                 .antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**, /jquery/**, /board/view/**").permitAll() // 해당 url 모두 접근 인증없이 허용
-                .anyRequest().authenticated() // 요청에 대하여 인증요청
+                .anyRequest().authenticated() // 나머지 요청에 대하여 인증요청
 
                 .and()
 

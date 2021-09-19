@@ -1,6 +1,8 @@
 package com.springweb.notice.domain.board;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.springweb.notice.domain.BaseTimeEntity;
+import com.springweb.notice.domain.reply.Reply;
 import com.springweb.notice.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -19,6 +23,7 @@ import javax.persistence.*;
 public class Board extends BaseTimeEntity {
 
     @Id
+    @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq_generator")
     private Long id;
 
@@ -33,6 +38,11 @@ public class Board extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OrderBy("id desc")
+    @JsonIgnoreProperties({"board"})
+    @OneToMany(mappedBy = "board")
+    private List<Reply> replyList = new ArrayList<>();
 
     public void addCount() {
         this.count++;

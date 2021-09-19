@@ -6,9 +6,7 @@ import java.util.Optional;
 
 public interface BoardRepositoryCutsom {
 
-    Optional<Board> findBoardByIdJoinUser(Long id);
-
-    Optional<Board> findBoardByIdJoinUserAndAddCount(Long id);
+    Optional<Board> findBoardByIdFetchJoinUser(Long id);
 
     boolean updateBoard(Long id, String title, String content, String username);
 }

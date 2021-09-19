@@ -32,7 +32,7 @@
                 <div class="m-3">
                     <label for="content">내용</label>
                     <script th:if="${#fields.hasErrors('content')}" type="text/javascript">alert("글 내용을 입력해주세요")</script>
-                    <textarea th:field="*{content}" class="form-control" id="content" style="height: 10em" placeholder="글 내용을 입력하세요"></textarea>
+                    <textarea th:field="*{content}" class="form-control" id="content" style="height: 10em; resize: none" placeholder="글 내용을 입력하세요"></textarea>
                 </div>
             </div>
 

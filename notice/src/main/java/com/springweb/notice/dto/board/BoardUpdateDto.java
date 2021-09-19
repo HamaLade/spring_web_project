@@ -25,6 +25,10 @@ public class BoardUpdateDto {
     public void getDataFromBoard(Board board) {
         this.id = board.getId();
         this.title = board.getTitle();
-        this.content = board.getContent();
+        this.content = replaceNewline(board.getContent());
+    }
+
+    public String replaceNewline(String content) {
+        return content.replace("<br>", "\n");
     }
 }
