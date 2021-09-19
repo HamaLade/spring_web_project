@@ -25,14 +25,10 @@ public class UserUpdateDto {
     @Size(min = 6, max = 30, message = "닉네임은 6 ~ 30자 이여야 합니다", groups = ValidationGroups.SizeGroup.class)
     private String nickname;
 
-    @Email(message = "잘못된 이메일 형식입니다", groups = ValidationGroups.EmailGroup.class)
-    private String email;
-
     public User toEntity() {
         return User.builder()
                 .username(this.username)
                 .password(this.password)
-                .email(this.email)
                 .build();
     }
 
@@ -40,7 +36,6 @@ public class UserUpdateDto {
         return UserUpdateDto.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .email(user.getEmail())
                 .build();
     }
 }

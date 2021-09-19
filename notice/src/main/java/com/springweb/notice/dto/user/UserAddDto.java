@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -28,17 +27,12 @@ public class UserAddDto {
     @Size(min = 8, max = 60, message = "패스워드는 8 ~ 60자 이여야 합니다", groups = SizeGroup.class)
     private String password;
 
-    @NotEmpty(message = "이메일은 필수 입력값 입니다", groups = NotEmptyGroup.class)
-    @Email(message = "잘못된 이메일 형식입니다", groups = EmailGroup.class)
-    private String email;
-
     private Role role;
 
     public User toEntity() {
         return User.builder()
                 .username(this.username)
                 .password(this.password)
-                .email(this.email)
                 .role(Role.USER)
                 .build();
     }
@@ -47,7 +41,6 @@ public class UserAddDto {
         return UserAddDto.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .email(user.getEmail())
                 .role(user.getRole())
                 .build();
     }

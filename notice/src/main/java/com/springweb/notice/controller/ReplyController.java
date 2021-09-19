@@ -41,19 +41,16 @@ public class ReplyController {
         return "board/view :: #replyCard";
     }
 
-    @DeleteMapping("reply/delete/{boardId}/{replyId}/{replyPage}")
-    public String deleteReply(@PathVariable("boardId") Long boardId,
-                              @PathVariable("replyId") Long replyId,
-                              @PathVariable("replyPage") Long replyPage,
-                              @RequestBody Reply reply,
-                              @AuthenticationPrincipal PrincipalDetail principalDetail,
+    @DeleteMapping("reply/delete/{replyId}/{replyPage}")
+    public String deleteReply(@PathVariable("replyId") Long replyId,
+                              @PathVariable("replyPage") Integer replyPage,
                               Model model) {
-        if (!replyService.replyAdd(boardId, reply, principalDetail.getUser()))
+        if (!replyService.replyDelete(replyId))
             throw new IllegalArgumentException("게시판의 데이터를 찾을 수 없습니다");
-        Page<Reply> replyPage = replyService.getReplyPage(1);
+        Page<Reply> replyPages = replyService.getReplyPage(replyPage);
         List<ReplyViewDto> replyList = new ArrayList<>();
-        for (Reply replys : replyPage) {
-            replyList.add(ReplyViewDto.getDataFromEntity(replys));
+        for (Reply reply : replyPages) {
+            replyList.add(ReplyViewDto.getDataFromEntity(reply));
         }
 
         model.addAttribute("replyList", replyList);

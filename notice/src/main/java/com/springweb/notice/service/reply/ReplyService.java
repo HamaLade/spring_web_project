@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class ReplyService {
@@ -33,7 +35,15 @@ public class ReplyService {
         return true;
     }
 
-    public boolean replyDelete(Long BoardId, Long ReplyId, User user)
+    public boolean replyDelete(Long ReplyId) {
+        Optional<Reply> replyOptional = replyRepository.findById(ReplyId);
+        Reply reply = replyOptional.orElse(null);
+
+        if (reply == null)
+            return false;
+        replyRepository.delete(reply);
+        return true;
+    }
 
     public Page<Reply> getReplyPage(Integer page) {
         PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.DESC, "id"));

@@ -45,10 +45,6 @@ public class PrincipalDetail implements UserDetails {
         return user.getPassword();
     }
 
-    public String getEmail() {
-        return user.getEmail();
-    }
-
     public User getUser() {
         return this.user;
     }

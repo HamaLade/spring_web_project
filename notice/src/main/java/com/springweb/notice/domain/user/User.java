@@ -26,9 +26,6 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false, length = 100)
     private String password;
 
-    @Column(nullable = false, length = 60)
-    private String email;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -40,7 +37,5 @@ public class User extends BaseTimeEntity {
     public void update(User user) {
         if (StringUtils.hasText(user.password))
             this.password = user.getPassword();
-        if (StringUtils.hasText(user.email))
-            this.email = user.getEmail();
     }
 }

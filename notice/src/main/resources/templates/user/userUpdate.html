@@ -32,14 +32,6 @@
                 </div>
             </div>
 
-            <div>
-                <div class="m-3">
-                    <label for="email">이메일</label>
-                    <div style="color: red" th:errors="*{email}"/>
-                    <input type="email" class="form-control" id="email" name="email" th:value="${#authentication.principal.email}">
-                </div>
-            </div>
-
             <div class="text-center">
                 <button class="btn btn-lg btn-primary mb-3" type="submit">회원정보수정</button>
                 <a class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">취소</a>

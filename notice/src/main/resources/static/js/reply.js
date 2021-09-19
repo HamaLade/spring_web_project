@@ -28,14 +28,15 @@ let replyIndex = {
     },
 
     replyDelete: function (replyId) {
-        let boardId = $("#boardId").val();
+        // let boardId = $("#boardId").val();
+        let replyPage = $("#replyPage").val();
         $.ajax({
             type: "DELETE",
-            url: `/reply/delete/${boardId}/${replyId}`,
-            dataType: "text"
-        }).done(function (res) {
-            alert("댓글삭제가 완료되었습니다.");
-            location.href = `/board/view/${boardId}`;
+            url: `/reply/delete/${replyId}/${replyPage}`,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+        }).done(function (fragment) {
+            $("#replyCard").replaceWith(fragment);
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
