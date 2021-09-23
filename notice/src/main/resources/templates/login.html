@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="h-100">
 
 <head th:replace="/fragments/header.html::fragment-header('로그인')"></head>
 
@@ -43,6 +43,7 @@
             <div class="text-center">
                 <button class="btn btn-lg btn-primary mb-3" type="submit">로그인</button>
                 <a class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">취소</a>
+                <a class="btn btn-lg mb-3 btn-primary" th:onclick="|location.href='@{/auth/user/find}'|">비밀번호찾기</a>
             </div>
         </form>
     </div>

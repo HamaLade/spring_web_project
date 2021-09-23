@@ -41,7 +41,7 @@ public class Board extends BaseTimeEntity {
 
     @OrderBy("id desc")
     @JsonIgnoreProperties({"board"})
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Reply> replyList = new ArrayList<>();
 
     public void addCount() {

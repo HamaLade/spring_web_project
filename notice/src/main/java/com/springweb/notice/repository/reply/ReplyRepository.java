@@ -1,5 +1,6 @@
 package com.springweb.notice.repository.reply;
 
+import com.springweb.notice.domain.board.Board;
 import com.springweb.notice.domain.reply.Reply;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,4 +11,8 @@ public interface ReplyRepository extends JpaRepository<Reply, Long>, ReplyReposi
 
     @Query(value = "select r from Reply r join fetch r.user", countQuery = "select count(r) from Reply r") // 혹은 count 대신 @EntityGraph를 사용해도 됨
     Page<Reply> findAll(Pageable pageable);
+
+    @Query(value = "select r from Reply r join fetch r.user where r.board = :board", countQuery = "select count(r) from Reply r where r.board = :board")
+    Page<Reply> findByBoard(Board board, Pageable pageable);
+
 }

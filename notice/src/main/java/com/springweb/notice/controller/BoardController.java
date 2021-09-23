@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -43,6 +44,7 @@ public class BoardController {
     public String write(@Validated @ModelAttribute("writeInfo")BoardWriteDto boardWriteDto, BindingResult bindingResult,
                         @AuthenticationPrincipal PrincipalDetail principalDetail) {
 
+        log.info("writeInfo : {}", boardWriteDto);
         if (bindingResult.hasErrors())
             return "board/write";
 
@@ -54,7 +56,8 @@ public class BoardController {
 //    글 보기
 
     @GetMapping("/board/view/{id}")
-    public String view(@PathVariable("id") Long id, @ModelAttribute("viewInfo") BoardViewDto boardViewDto,
+    public String view(@PathVariable("id") Long id,
+                       @ModelAttribute("viewInfo") BoardViewDto boardViewDto,
                        @ModelAttribute("replyListInfo") ReplyViewListDto replyViewListDto, Model model,
                        HttpServletRequest request, HttpServletResponse response) {
 
@@ -63,7 +66,7 @@ public class BoardController {
             return "index"; // 찾을 수 없는 페이지
 
         boardViewDto.getDataFromEntity(findBoard);
-        Page<Reply> replyPage = boardService.getReplyPage();
+        Page<Reply> replyPage = boardService.getReplyPage(findBoard);
         replyViewListDto.getDataFromPage(replyPage, 1);
         List<ReplyViewDto> replyList = new ArrayList<>();
         for (Reply reply : replyPage) {

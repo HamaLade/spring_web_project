@@ -7,6 +7,15 @@
     <header th:replace="/fragments/nav.html::fragment-nav"></header>
 
 <main class="flex-shrink-0">
+
+    <div>
+        <form th:action="@{/}" method="get" class="d-flex justify-content-center">
+            <label id="searchLabel" for="searchText"></label>
+            <input type="text" class="form-control w-25 m-md-1" id="searchText" name="searchText" th:value="${param.searchText}"/>
+            <button class="btn btn-lg btn-secondary m-md-1" type="submit">검색</button>
+        </form>
+    </div>
+
     <div class="container">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" th:each="board :${boardList.infoList}">
             <div class="col p-4 d-flex flex-column position-static">
@@ -20,16 +29,16 @@
     </div>
 </main>
 
-<nav aria-label="Page navigation">
+<nav aria-label="Page navigation" th:if="${boardList.startPage != 0}">
     <ul class="pagination justify-content-center">
-        <li class="page-item" th:if="${1 != boardList.nowPage}">
-            <a class="page-link" th:href="@{/(page=${boardList.nowPage - 1})}">이전</a>
+        <li class="page-item" th:if="${1 < boardList.nowPage}">
+            <a class="page-link" th:href="@{/(page=${boardList.nowPage - 1}, searchText=${param.searchText})}">이전</a>
         </li>
         <li class="page-item" th:classappend="${i == boardList.nowPage} ? 'active' : '' " th:each="i : ${#numbers.sequence(boardList.startPage, boardList.endPage)}">
-            <a class="page-link" th:href="@{/(page=${i})}" th:text="${i}">1</a>
+            <a class="page-link" th:href="@{/(page=${i}, searchText=${param.searchText})}" th:text="${i}">1</a>
         </li>
         <li class="page-item" th:if="${boardList.endPage != boardList.nowPage}">
-            <a class="page-link" th:href="@{/(page=${boardList.nowPage + 1})}">다음</a>
+            <a class="page-link" th:href="@{/(page=${boardList.nowPage + 1}, searchText=${param.searchText})}">다음</a>
         </li>
     </ul>
 </nav>

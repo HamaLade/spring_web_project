@@ -39,7 +39,7 @@ public class BoardWriteDto {
     }
 
     public String lineReplace(String content) {
-        return content.replace("\r\n", "<br>");
+        return content.replace("\n", "<br>");
     }
 
     public void setUser(User user) {

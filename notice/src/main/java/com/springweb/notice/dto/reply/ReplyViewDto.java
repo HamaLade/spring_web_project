@@ -22,7 +22,7 @@ public class ReplyViewDto {
     public static ReplyViewDto getDataFromEntity(Reply reply) {
         return ReplyViewDto.builder()
                 .id(reply.getId())
-                .content(reply.getContent())
+                .content(reply.getContent().replace("\r\n", "<br>"))
                 .username(reply.getUser().getUsername())
                 .createTime(reply.getCreateTime())
                 .build();

@@ -31,6 +31,10 @@ public class BoardService {
         return boardRepository.findById(id).orElse(null);
     }
 
+    public Board findByIdWithUser(Long id) {
+        return boardRepository.findBoardByIdFetchJoinUser(id).orElse(null);
+    }
+
     @Transactional
     public Board findView(Long id, HttpServletRequest request, HttpServletResponse response) {
         Board result = null;
@@ -85,9 +89,14 @@ public class BoardService {
         return boardRepository.findAll(pageRequest);
     }
 
-    public Page<Reply> getReplyPage() {
+    public Page<Board> getSearchPage(int page, String search) {
+        PageRequest pageRequest = PageRequest.of(page - 1, 5, Sort.by(Sort.Direction.DESC, "id"));
+        return boardRepository.findByContentContains(search, pageRequest);
+    }
+
+    public Page<Reply> getReplyPage(Board board) {
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "id"));
-        return replyRepository.findAll(pageRequest);
+        return replyRepository.findByBoard(board, pageRequest);
     }
 
     public String lineReplace(String content) {

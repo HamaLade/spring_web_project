@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
@@ -22,17 +23,18 @@ public class ReplyService {
     private final BoardService boardService;
     private final UserService userService;
 
-    public boolean replyAdd(Long boardId, Reply reply, User user) {
+    public Board replyAdd(Long boardId, Reply reply, User user) {
 
         Board board = boardService.findById(boardId);
 
         if (board == null)
-            return false;
+            return null;
+        if (StringUtils.hasText(reply.getContent())) {
+            reply.replyInit(board, user);
+            replyRepository.save(reply);
+        }
 
-        reply.replyInit(board, user);
-        replyRepository.save(reply);
-
-        return true;
+        return board;
     }
 
     public boolean replyDelete(Long ReplyId) {
@@ -45,8 +47,8 @@ public class ReplyService {
         return true;
     }
 
-    public Page<Reply> getReplyPage(Integer page) {
+    public Page<Reply> getReplyPage(Integer page, Board board) {
         PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.DESC, "id"));
-        return replyRepository.findAll(pageRequest);
+        return replyRepository.findByBoard(board, pageRequest);
     }
 }

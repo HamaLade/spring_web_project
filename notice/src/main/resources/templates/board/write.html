@@ -22,7 +22,7 @@
                 <div class="m-3">
                     <label for="title">제목</label>
                     <script th:if="${#fields.hasErrors('title')}" type="text/javascript">alert("제목을 입력하셔야 합니다 (최대 150자)")</script>
-                    <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="제목을 입력하세요">
+                    <input type="text" th:field="${writeInfo.title}" class="form-control" id="title" placeholder="제목을 입력하세요">
                 </div>
             </div>
 
@@ -45,7 +45,6 @@
 
 </main>
 
-</main>
 <footer th:replace="/fragments/footer.html::fragment-footer"></footer>
 <script th:src="@{/jquery/jquery-3.6.0.min.js}"></script>
 <script th:src="@{/js/bootstrap.js}"></script>

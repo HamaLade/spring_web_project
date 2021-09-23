@@ -44,6 +44,8 @@ public class Reply extends BaseTimeEntity {
     }
 
     public Reply replyInit(Board board, User user) {
+        this.content = this.getContent().replace("\n", "<br>");
+
         boardChanger(board);
         this.user = user;
 

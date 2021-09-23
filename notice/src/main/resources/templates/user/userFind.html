@@ -8,12 +8,12 @@
 
 <main class="form-signin">
     <div class="container border rounded flex-md-row mb-4 shadow-sm h-md-250">
-        <form action="" th:action th:object="${userAddInfo}" method="post">
+        <form action="" th:action th:object="${userFindInfo}" method="post">
             <div th:if="${#fields.hasGlobalErrors()}">
                 <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 에러 출력</p>
             </div>
 
-            <h1 class="h3 m-3">회원가입</h1>
+            <h1 class="h3 m-3">회원찾기</h1>
 
             <div>
                 <div class="m-3">
@@ -25,32 +25,15 @@
 
             <div>
                 <div class="m-3">
-                    <label for="password">패스워드</label>
-                    <div style="color: red" th:errors="*{password}"/>
-                    <input th:field="*{password}" type="password" class="form-control pw" id="password" placeholder="패스워드를 입력하세요.">
-                </div>
-            </div>
-
-            <div>
-                <div class="m-3">
-                    <label for="passwordCheck">패스워드 확인</label>
-                    <span id="alert-success" style="display: none; color: chartreuse">비밀번호가 일치합니다.</span>
-                    <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
-                    <input type="password" class="form-control pw" id="passwordCheck" placeholder="패스워드를 입력하세요.">
-                </div>
-            </div>
-
-            <div>
-                <div class="m-3">
-                    <label for="email">이메일(필수 입력값이 아닙니다, 비밀번호 찾기 용도, @포함하여 입력)</label>
+                    <label for="email">이메일</label>
                     <div style="color: red" th:errors="*{email}"/>
                     <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="이메일을 입력하세요.">
                 </div>
             </div>
 
             <div class="text-center">
-                <button class="btn btn-lg btn-primary mb-3" type="submit">회원가입</button>
-                <a class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">취소</a>
+                <button class="btn btn-lg btn-primary mb-3" type="submit">Ok</button>
+                <a class="btn btn-lg mb-3 btn-secondary" onclick="history.back()">Cancel</a>
             </div>
         </form>
     </div>
@@ -59,6 +42,11 @@
 <footer th:replace="/fragments/footer.html::fragment-footer"></footer>
 <script th:src="@{/jquery/jquery-3.6.0.min.js}"></script>
 <script th:src="@{/js/bootstrap.js}"></script>
-<script th:src="@{/js/userAdd.js}"></script>
+<script>
+    document.form.submit(function () {
+        alert("이메일로 임시 비밀번호가 전송되었습니다");
+        return true;
+    });
+</script>
 </body>
 </html>

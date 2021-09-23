@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -27,20 +29,30 @@ public class UserAddDto {
     @Size(min = 8, max = 60, message = "패스워드는 8 ~ 60자 이여야 합니다", groups = SizeGroup.class)
     private String password;
 
+    private String email;
+
     private Role role;
 
     public User toEntity() {
         return User.builder()
                 .username(this.username)
                 .password(this.password)
+                .email(stringNullCheck(this.email))
                 .role(Role.USER)
                 .build();
+    }
+
+    public String stringNullCheck(String str) {
+        if (!StringUtils.hasText(str))
+            return null;
+        return str;
     }
 
     public static UserAddDto fromEntity(User user) {
         return UserAddDto.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
+                .email(user.getEmail())
                 .role(user.getRole())
                 .build();
     }
